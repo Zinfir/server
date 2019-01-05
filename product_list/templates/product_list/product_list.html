@@ -24,12 +24,15 @@
     <div class="slider-table padding-side">
         <div class="products-menu-container">
             <ul class="products-menu">
-                <li ><a class="products-menu-item" href="{% url 'product_list:product_list' %}">ALL</a></li>
-                <li><a class="products-menu-item" href="{% url 'product_list:product_list' %}">HOME</a></li>
-                <li class="products-menu-active"><a class="products-menu-item" href="{% url 'product_list:product_list' %}">OFFICE</a></li>
-                <li><a class="products-menu-item" href="{% url 'product_list:product_list' %}">FURNITURE</a></li>
-                <li><a class="products-menu-item" href="{% url 'product_list:product_list' %}">MODERN</a></li>
-                <li><a class="products-menu-item" href="{% url 'product_list:product_list' %}">CLASSIC</a></li>
+                    {% for link in sub_links %}
+                    <li>
+                        <a class="{% if request.resolver_match.url_name == link.name %}
+                        products-menu-active
+                        {% endif %}
+                        products-menu-item"
+                        " href="{% url link.href %}">{{ link.name|upper }}</a>
+                    </li>
+                  {% endfor %}
             </ul>
         </div>
 

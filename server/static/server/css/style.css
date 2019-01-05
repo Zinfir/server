@@ -1025,12 +1025,14 @@ body {
 .products-menu-container {
     display: flex;
     justify-content: space-between;
+    border-bottom: 3px transparent;
 }
 
 .products-menu {
     display: flex;
     margin-top: 79px;
     padding-left: 0;
+    border-bottom: 3px transparent;
 }
 
 .products-menu li {
