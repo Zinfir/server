@@ -1,0 +1,22 @@
+{% extends 'server/master.html' %}
+
+{% load static %}
+
+{% block page_title %} 
+    List Page
+{% endblock %}
+   
+{% block page_styles %}
+    <link rel="stylesheet" href="{% static 'products/style.css' %}">
+    <link rel="stylesheet" href="{% static 'server/style.css' %}">
+{% endblock %}
+    
+{% block page_content %}
+    <div class="product__list">
+        {% for itm in results %}
+        
+        {% include 'products/components/product.html' with title=itm id=forloop.counter0 %}
+
+        {% endfor %}
+    </div>
+{% endblock %}

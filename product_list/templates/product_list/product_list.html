@@ -1,0 +1,188 @@
+{% extends 'server/master.html' %}
+
+{% load static %}
+
+{% block title %}
+{{'product list'|title}}
+{% endblock %}
+
+{% block content %}
+
+<div class="top">
+    <div class="contact_page_header padding-side">
+        <header class="header-top">
+            <div class="header">
+                    {% include 'server/components/inc_menu.html' %}
+            </div>
+        </header>
+
+        <div class="contact_us_heading">
+            <h2>Our Products Range</h2>
+        </div>
+    </div>
+
+    <div class="slider-table padding-side">
+        <div class="products-menu-container">
+            <ul class="products-menu">
+                <li ><a class="products-menu-item" href="{% url 'product_list:product_list' %}">ALL</a></li>
+                <li><a class="products-menu-item" href="{% url 'product_list:product_list' %}">HOME</a></li>
+                <li class="products-menu-active"><a class="products-menu-item" href="{% url 'product_list:product_list' %}">OFFICE</a></li>
+                <li><a class="products-menu-item" href="{% url 'product_list:product_list' %}">FURNITURE</a></li>
+                <li><a class="products-menu-item" href="{% url 'product_list:product_list' %}">MODERN</a></li>
+                <li><a class="products-menu-item" href="{% url 'product_list:product_list' %}">CLASSIC</a></li>
+            </ul>
+        </div>
+
+        <div class="product-box">
+            <div class="block product-hover">
+                <img src="{% static 'product_list/img/product-11.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+
+            <div class="block product-hover">
+                <img src="{% static 'product_list/img/product-21.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+
+            <div class="block product-hover">
+                <img src="{% static 'product_list/img/product-31.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+
+            <div class="block product-hover">
+                <img src="{% static 'product_list/img/product-41.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+
+            <div class="block product-hover">
+                <img src="{% static 'product_list/img/product-51.jpg' %}" alt="product">
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+
+            <div class="block product-hover">
+                <img src="{% static 'product_list/img/product-61.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+            
+            <div class="block product-hover">
+                <img src="{% static 'product_list/img/product-11.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+
+            <div class="block product-hover">
+                <img src="{% static 'product_list/img/product-21.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+
+            <div class="block product-hover">
+                <img src="{% static 'product_list/img/product-31.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+
+            <div class="block product-hover">
+                <img src="{% static 'product_list/img/product-41.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+
+            <div class="block product-hover">
+                <img src="{% static 'product_list/img/product-51.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+
+            <div class="block product-hover">
+                <img src="{% static 'product_list/img/product-61.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="refresh-container">
+            <a class="refresh-link" href="{% url 'product_list:product_list' %}"><img class="refresh-img" src="{% static 'product_list/img/refresh.png' %}" alt="refresh"></a>
+        </div>
+    </div>
+    
+    <div class="space">
+    </div>
+    
+    <div class="slider-two-sides">
+        <div class="slider-left">
+            <h3>exclusive</h3>
+
+            <h2>Fishnet Chair</h2>
+
+            <p>Seat and back with upholstery made of&nbsp;cold cure foam. Steel frame, available in&nbsp;matt powder-coated black or&nbsp;highly polished chrome.</p>
+
+            {% include 'product_list/components/inc_order_button.html' %}
+        </div>
+
+        <div class="slider-right">
+            <h3>exclusive</h3>
+
+            <h2>Fishnet Chair</h2>
+
+            <p>Seat and back with upholstery made of&nbsp;cold cure foam. Steel frame, available in&nbsp;matt powder-coated black or&nbsp;highly polished chrome.</p>
+
+            {% include 'product_list/components/inc_order_button.html' %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

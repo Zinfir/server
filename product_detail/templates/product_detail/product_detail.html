@@ -1,0 +1,99 @@
+{% extends 'server/master.html' %}
+
+{% load static %}
+
+{% block title %}
+{{'product detail'|title}}
+{% endblock %}
+        
+{% block content %}
+
+<div class="top">
+    <div class="product_page_header padding-side">
+        <header class="header-top">
+            <div class="header">
+                {% include 'server/components/inc_menu.html' %}
+            </div>
+        </header>
+    </div>
+            
+    {% include 'product_detail/components/inc_categories_menu.html' %}
+
+    <div class="product_details_container padding-side">
+        <div class="product_images">
+            <div class="product_detailed_image">
+                <a href="{% url 'product_detail:product_detail' %}"><img src="{% static 'product_detail/img/product-detailed-img.jpg' %}" alt="product-detailed-img"></a>
+            </div>
+
+            <div class="other_product_images">
+                <a href="{% url 'product_detail:product_detail' %}"><img src="{% static 'product_detail/img/controll.jpg' %}" alt="product-detailed-img"></a>
+                <a href="{% url 'product_detail:product_detail' %}"><img src="{% static 'product_detail/img/controll11.jpg' %}" alt="product-detailed-img"></a>
+                <a href="{% url 'product_detail:product_detail' %}"><img src="{% static 'product_detail/img/controll2.jpg' %}" alt="product-detailed-img"></a>
+            </div>
+        </div>
+
+        <div class="product_info">
+            <h2>Product</h2>
+            <h3>HOT DEAL</h3>
+            <div class="price-container">
+                <p class="price-text">$</p>
+                <p class="price"> 36.7</p>
+                <p class="price-text">/sq</p>
+            </div>
+
+            <a class="product_order_button" href="{% url 'product_detail:product_detail' %}">Order Us<img src="{% static 'product_detail/img/arrow1.png' %}" alt="arrow"></a>
+            <p class="product-page-text">The majesty of Mountains - Ugmonk style. <br><br>
+
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+             Maiores, amet quae temporibus odit pariatur rerum, exercitationem quam voluptatum odio non quos eaque magnam facere voluptatibus. <br><br>
+
+             Minima maiores, perferendis voluptatibus hic autem sed pariatur quod vel deserunt at minus officiis illo aut tempore saepe quidem dolores voluptas quibusdam alias, neque quae! <br><br>
+            </p>
+        </div>
+    </div>
+
+    <div class="slider-table">
+        <div class="slider-table-header">
+            <a href="{% url 'main:main' %}" class="trending_product">Trending Products</a>
+
+            {% include 'product_detail/components/inc_explore-link.html' %}
+        </div>
+
+        <div class="product-box">
+            <div class="block product-hover">
+                <img src="{% static 'product_detail/img/product-11.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+
+            <div class="block product-hover">
+                <img src="{% static 'product_detail/img/product-21.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+
+            <div class="block product-hover">
+                <img src="{% static 'product_detail/img/product-31.jpg' %}" alt="product">
+
+                <div class="product-text">
+                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <h3>Fishnet Chair</h3>
+                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="refresh-container">
+        </div>
+    </div>
+</div>
+
+{% endblock %}

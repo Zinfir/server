@@ -1,0 +1,39 @@
+{% load static %}
+
+{% block menu %}
+
+<header class="header-home-top">
+    <div class="header-home">
+        <a class="logo" href="{% url 'main:main' %}"><img src="{% static 'server/img/logo.png' %}" alt="logo"></a>
+
+        <ul class="menu">
+                {% for link in links %}
+                <li>
+                    <a class="{% if request.resolver_match.url_name == link.name %}
+                    active_link
+                    {% else %}
+                    menu-link
+                    {% endif %}"
+                    " href="{% url link.href %}">
+                    {% if link.name == 'main' %}
+                    {{ 'home'|upper }}
+                    {% elif link.name == 'product_list' %}
+                    {{ 'products'|upper }}
+                    {% else %}
+                    {{ link.name|upper }}
+                    {% endif %}
+                    </a>
+                </li>
+              {% endfor %}
+            <!-- <li><a class="active_link" href="{% url 'main:main' %}">HOME</a></li>
+            <li><a class="menu-link" href="{% url 'product_list:product_list' %}">PRODUCTS</a></li>
+            <li><a class="menu-link" href="{% url 'main:main' %}">HISTORY</a></li>
+            <li><a class="menu-link" href="{% url 'main:main' %}">SHOWROOM</a></li>
+            <li><a class="menu-link" href="{% url 'contacts:contacts' %}">CONTACT</a></li> -->
+            <li><a class="search-link" href="{% url 'main:main' %}"><img src="{% static 'server/img/search.svg' %}" alt="search"></a></li>
+        </ul>
+    </div>
+</header>
+
+
+{% endblock %}
