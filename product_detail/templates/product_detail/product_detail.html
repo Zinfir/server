@@ -18,6 +18,12 @@
     </div>
             
     {% include 'product_detail/components/inc_categories_menu.html' %}
+    
+    {% for product in products %}
+    <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
+    <h3>{{ product.category.name }}</h3>
+    <h4>{{ product.name }}</h4>
+    {% endfor %}
 
     <div class="product_details_container padding-side">
         <div class="product_images">
