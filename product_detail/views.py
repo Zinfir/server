@@ -1,27 +1,45 @@
+"""
+Контроллер для страницы детального описания продукта
+"""
+import json
+
 from django.shortcuts import render
 
+from product_list.models import Product_Category
+from product_detail.models import Product
+
+
 def product_detail(request):
+    """
+    Рендеринг страницы детального описания продукта
 
-    links_menu = {
-        'links' : [
-            { 'href' : 'main:main' , 'name' : 'main' },
-            { 'href' : 'product_list:product_list' , 'name' : 'product_list' },
-            { 'href' : 'product_list:history' , 'name' : 'history' },
-            { 'href' : 'product_list:showroom' , 'name' : 'showroom' },
-            { 'href' : 'contacts:contacts' , 'name' : 'contacts' },
-        ],
-        'sub_links' : [
-            { 'href' : 'product_detail:all' , 'name' : 'all' },
-            { 'href' : 'product_detail:home' , 'name' : 'home' },
-            { 'href' : 'product_detail:office' , 'name' : 'office' },
-            { 'href' : 'product_detail:modern' , 'name' : 'modern' },
-            { 'href' : 'product_detail:furniture' , 'name' : 'furniture' },
-            { 'href' : 'product_detail:classic' , 'name' : 'classic' },
-        ],
-        'content' : [
-            'fishnet chair',
-            'another chair',
-        ]
-    }
+    Args:
+        request (str): запрос пользователя
 
-    return render(request, "product_detail/product_detail.html", links_menu)
+    Returns:
+        product_detail.html: страница html с подробным описанием товара
+    """
+    context = {}
+
+    with open('data/context.json') as file:
+        context = json.load(file)
+
+    products = []
+    products += Product.objects.filter(name='Red Wooden Chair')
+    products += Product.objects.filter(name='Blue Wooden Chair')
+    products += Product.objects.filter(name='Dark Blue Wooden Chair')
+    products += Product.objects.filter(name='Hanging Lamp')
+    products += Product.objects.filter(name='White Arm Chair')
+    products += Product.objects.filter(name='Table Lamp')
+
+    context["product_detail_products"] = products
+
+    categories_menu_links = []
+
+    categories_menu_links += Product_Category.objects.all()[1:]
+
+    context["categories_menu_links"] = categories_menu_links
+
+    
+
+    return render(request, "product_detail/product_detail.html", context)
