@@ -18,23 +18,28 @@
     </div>
             
     {% include 'product_detail/components/inc_categories_menu.html' %}
-    
-    {% for product in products %}
-    <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
-    <h3>{{ product.category.name }}</h3>
-    <h4>{{ product.name }}</h4>
-    {% endfor %}
 
     <div class="product_details_container padding-side">
+
         <div class="product_images">
-            <div class="product_detailed_image">
-                <a href="{% url 'product_detail:product_detail' %}"><img src="{% static 'product_detail/img/product-detailed-img.jpg' %}" alt="product-detailed-img"></a>
-            </div>
+            {% for product in product_detail_products %}
+            {% if forloop.counter0 == 0 %}
+                <div class="product_detailed_image">
+                <a href="{% url 'product_detail:product_detail' %}">
+                    <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
+                </a>
+                </div>
+            {% endif %}
+            {% endfor %}
 
             <div class="other_product_images">
-                <a href="{% url 'product_detail:product_detail' %}"><img src="{% static 'product_detail/img/controll.jpg' %}" alt="product-detailed-img"></a>
-                <a href="{% url 'product_detail:product_detail' %}"><img src="{% static 'product_detail/img/controll11.jpg' %}" alt="product-detailed-img"></a>
-                <a href="{% url 'product_detail:product_detail' %}"><img src="{% static 'product_detail/img/controll2.jpg' %}" alt="product-detailed-img"></a>
+                {% for product in product_detail_products %}
+                {% if forloop.counter0 > 0 and forloop.counter0 < 3 %}
+                    <a href="{% url 'product_detail:product_detail' %}">
+                        <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
+                    </a>
+                {% endif %}
+            {% endfor %}
             </div>
         </div>
 
@@ -66,35 +71,23 @@
         </div>
 
         <div class="product-box">
-            <div class="block product-hover">
-                <img src="{% static 'product_detail/img/product-11.jpg' %}" alt="product">
 
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
+                {% for product in product_detail_products %}
 
-            <div class="block product-hover">
-                <img src="{% static 'product_detail/img/product-21.jpg' %}" alt="product">
+                {% if forloop.counter0 > 2 %}
+                <div class="block product-hover">
+                        <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
+        
+                        <div class="product-text">
+                            <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                            <h3>{{ product.name }}</h3>
+                            <p>{{ product.product_category.name }}</p>
+                        </div>
+                    </div>
+                {% endif %}
 
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
+                {% endfor %}
 
-            <div class="block product-hover">
-                <img src="{% static 'product_detail/img/product-31.jpg' %}" alt="product">
-
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
         </div>
 
         <div class="refresh-container">

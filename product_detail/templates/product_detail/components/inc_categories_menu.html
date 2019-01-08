@@ -1,14 +1,14 @@
 <div class="product_page_subheader padding-side">
   <ul class=" product_page_menu ">
-  {% for link in sub_links %}
+  {% for category in categories_menu_links %}
     <li>
-        <a class="{% if request.resolver_match.url_name == link.name %}
+        <a class="{% if request.resolver_match.url_name == category.name|lower %}
         active_submenu_link
         {% else %}
         submenu-link
         {% endif %}"
-        " href="{% url link.href %}">{{ link.name|upper }}</a>
+        " href="{% url category.href %}">{{ category.name|upper }}</a>
     </li>
   {% endfor %}
-  </ ul>
+  </ul>
 </div>

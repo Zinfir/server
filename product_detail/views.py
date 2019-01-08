@@ -24,6 +24,22 @@ def product_detail(request):
     with open('data/context.json') as file:
         context = json.load(file)
 
-    context["products"] = Product.objects.all()[:4]
+    products = []
+    products += Product.objects.filter(name='Red Wooden Chair')
+    products += Product.objects.filter(name='Blue Wooden Chair')
+    products += Product.objects.filter(name='Dark Blue Wooden Chair')
+    products += Product.objects.filter(name='Hanging Lamp')
+    products += Product.objects.filter(name='White Arm Chair')
+    products += Product.objects.filter(name='Table Lamp')
+
+    context["product_detail_products"] = products
+
+    categories_menu_links = []
+
+    categories_menu_links += Product_Category.objects.all()[1:]
+
+    context["categories_menu_links"] = categories_menu_links
+
+    
 
     return render(request, "product_detail/product_detail.html", context)

@@ -24,137 +24,51 @@
     <div class="slider-table padding-side">
         <div class="products-menu-container">
             <ul class="products-menu">
-                    {% for link in sub_links %}
+                    {% for category in categories_menu_links %}
                     <li>
-                        <a class="{% if request.resolver_match.url_name == link.name %}
+                        <a class="{% if request.resolver_match.url_name == category.name|lower %}
                         products-menu-active
                         {% endif %}
+                        submenu-link
                         products-menu-item"
-                        " href="{% url link.href %}">{{ link.name|upper }}</a>
+                        " href="{% url category.href %}">{{ category.name|upper }}</a>
                     </li>
-                  {% endfor %}
+                    {% endfor %}
             </ul>
         </div>
 
         <div class="product-box">
-            <div class="block product-hover">
-                <img src="{% static 'product_list/img/product-11.jpg' %}" alt="product">
+                {% for product in product_list_products %}
 
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
+                {% if forloop.counter0 < 6 %}
+                <div class="block product-hover">
+                        <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
+        
+                        <div class="product-text">
+                            <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                            <h3>{{ product.name }}</h3>
+                            <p>{{ product.product_category.name }}</p>
+                        </div>
+                    </div>
+                {% endif %}
 
-            <div class="block product-hover">
-                <img src="{% static 'product_list/img/product-21.jpg' %}" alt="product">
+                {% endfor %}
 
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
+                {% for product in product_list_products %}
 
-            <div class="block product-hover">
-                <img src="{% static 'product_list/img/product-31.jpg' %}" alt="product">
+                {% if forloop.counter0 < 6 %}
+                <div class="block product-hover">
+                        <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
+        
+                        <div class="product-text">
+                            <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                            <h3>{{ product.name }}</h3>
+                            <p>{{ product.product_category.name }}</p>
+                        </div>
+                    </div>
+                {% endif %}
 
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
-
-            <div class="block product-hover">
-                <img src="{% static 'product_list/img/product-41.jpg' %}" alt="product">
-
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
-
-            <div class="block product-hover">
-                <img src="{% static 'product_list/img/product-51.jpg' %}" alt="product">
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
-
-            <div class="block product-hover">
-                <img src="{% static 'product_list/img/product-61.jpg' %}" alt="product">
-
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
-            
-            <div class="block product-hover">
-                <img src="{% static 'product_list/img/product-11.jpg' %}" alt="product">
-
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
-
-            <div class="block product-hover">
-                <img src="{% static 'product_list/img/product-21.jpg' %}" alt="product">
-
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
-
-            <div class="block product-hover">
-                <img src="{% static 'product_list/img/product-31.jpg' %}" alt="product">
-
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
-
-            <div class="block product-hover">
-                <img src="{% static 'product_list/img/product-41.jpg' %}" alt="product">
-
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
-
-            <div class="block product-hover">
-                <img src="{% static 'product_list/img/product-51.jpg' %}" alt="product">
-
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
-
-            <div class="block product-hover">
-                <img src="{% static 'product_list/img/product-61.jpg' %}" alt="product">
-
-                <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
-                    <h3>Fishnet Chair</h3>
-                    <p>Seat and back with upholstery made of&nbsp;cold cure foam</p>
-                </div>
-            </div>
+                {% endfor %}
         </div>
 
         <div class="refresh-container">
@@ -166,25 +80,42 @@
     </div>
     
     <div class="slider-two-sides">
+        
+        {% for product in product_list_products reversed %}
+
+        {% if forloop.counter0 == 0 %}
+
         <div class="slider-left">
-            <h3>exclusive</h3>
+            <h3>{{ product.special_offer }}</h3>
 
-            <h2>Fishnet Chair</h2>
+            <h2>{{ product.name }}</h2>
 
-            <p>Seat and back with upholstery made of&nbsp;cold cure foam. Steel frame, available in&nbsp;matt powder-coated black or&nbsp;highly polished chrome.</p>
+            <p>{{ product.description }}</p>
 
             {% include 'product_list/components/inc_order_button.html' %}
         </div>
+
+        {% endif %}
+
+        {% endfor %}
+
+        {% for product in product_list_products reversed %}
+
+        {% if forloop.counter0 == 1 %}
 
         <div class="slider-right">
-            <h3>exclusive</h3>
+            <h3>{{ product.special_offer }}</h3>
 
-            <h2>Fishnet Chair</h2>
+            <h2>{{ product.name }}</h2>
 
-            <p>Seat and back with upholstery made of&nbsp;cold cure foam. Steel frame, available in&nbsp;matt powder-coated black or&nbsp;highly polished chrome.</p>
+            <p>{{ product.description }}</p>
 
             {% include 'product_list/components/inc_order_button.html' %}
         </div>
+
+        {% endif %}
+
+        {% endfor %}
     </div>
 </div>
 
