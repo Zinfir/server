@@ -36,7 +36,7 @@ def product_detail(request):
 
     categories_menu_links = []
 
-    categories_menu_links += Product_Category.objects.all()[1:]
+    categories_menu_links += Product_Category.objects.all()
 
     context["categories_menu_links"] = categories_menu_links
 

@@ -1,21 +1,20 @@
 from django.db import models
 
-from product_list.models import Product_Category
-
 
 class Product(models.Model):
     product_category = models.ForeignKey(
-        Product_Category,
+        'product_list.Product_Category',
         on_delete = models.CASCADE
         )
     name = models.CharField(
         verbose_name = 'имя продукта',
-        max_length = 128
+        max_length = 128,
+        unique = True,
         )
-    image = models.ImageField(
-        upload_to = 'products_images', 
-        blank = True
-        )
+    image = models.ForeignKey(
+        'images.Image',
+        on_delete=models.PROTECT,
+    )
     short_desc = models.CharField(
         verbose_name = 'краткое описание',
         max_length = 60,
@@ -41,7 +40,13 @@ class Product(models.Model):
         verbose_name = 'склад',
         default = 0
     )
+    modified = models.DateTimeField(
+        auto_now=True
+    )
+    created = models.DateTimeField(
+        auto_now_add=True
+    )
 
 
     def __str__(self):
-        return "{} ({})".format(self.name, self.product_category.name)
+        return self.name
