@@ -4,10 +4,12 @@ import json
 
 from django.db import migrations
 
+from product_detail.models import Product
 from product_list.models import Product_Category
+from images.models import Image
+   
 
-
-def populate_data_base_with_categories(apps, schema_editor):
+def populate_data_base(apps, schema_editor):
 
     context = {}
 
@@ -23,6 +25,26 @@ def populate_data_base_with_categories(apps, schema_editor):
         category = Product_Category(name=data["name"], description=data["description"], href=data["href"])
         category.save()
 
+    products = []
+
+    products = context["products"]
+
+
+    for data in products:
+        category = Product_Category.objects.get(name=data["product_category"])
+        image = Image.objects.get(name=data["image"])
+        prod = Product(
+            product_category=category,
+            name=data["name"],
+            image=image,
+            short_desc=data["short_desc"],
+            description=data["description"],
+            special_offer=data["special_offer"],
+            price=data["price"],
+            quantity=data["quantity"]
+            )
+        prod.save()
+
 
 class Migration(migrations.Migration):
 
@@ -32,7 +54,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.RunPython(
-            populate_data_base_with_categories,
+            populate_data_base,
             lambda x, y: (x, y)
         )
     ]
