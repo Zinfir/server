@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'products',
 
     'images',
+    'accounts',
     'product_list',
     'product_detail',
     
@@ -110,6 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'accounts.Account'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/

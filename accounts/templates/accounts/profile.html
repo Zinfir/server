@@ -1,0 +1,30 @@
+{% extends 'server/master.html' %}
+
+{% load static %}
+
+{% block title %} 
+    Profile
+{% endblock %}
+   
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'server/style.css' %}">
+{% endblock %}
+    
+{% block content %}
+
+{% include 'server/components/inc_menu.html' %}
+
+    <p>{{ instance.username|default:'default_username' }}</p>
+    <p>{{ instance.first_name|default:'default_first_name' }}</p>
+    <p>{{ instance.last_name|default:'default_last_name' }}</p>
+    <p>{{ instance.email|default:'default_email' }}</p>
+    <p>{{ instance.phone|default:'default_phone' }}</p>
+    <p>{{ instance.avatar|default:'default_avatar' }}</p>
+    <form class="model-form" method="POST" action="">
+        {% csrf_token %}
+
+        <button value="Update">
+            <a href="{% url 'accounts:update' pk=instance.pk %}">Update</a>
+        </button>
+    </form>
+{% endblock %}

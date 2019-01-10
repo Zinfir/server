@@ -24,13 +24,22 @@
                     {% endif %}
                     </a>
                 </li>
-              {% endfor %}
-            <!-- <li><a class="active_link" href="{% url 'main:main' %}">HOME</a></li>
-            <li><a class="menu-link" href="{% url 'product_list:product_list' %}">PRODUCTS</a></li>
-            <li><a class="menu-link" href="{% url 'main:main' %}">HISTORY</a></li>
-            <li><a class="menu-link" href="{% url 'main:main' %}">SHOWROOM</a></li>
-            <li><a class="menu-link" href="{% url 'contacts:contacts' %}">CONTACT</a></li> -->
-            <li><a class="search-link" href="{% url 'main:main' %}"><img src="{% static 'server/img/search.svg' %}" alt="search"></a></li>
+                {% endfor %}
+                <li><a class="search-link" href="{% url 'main:main' %}"><img src="{% static 'server/img/search.svg' %}" alt="search"></a></li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href= "{% url 'accounts:profile' pk=user.pk %}" >
+                        {{ user }}
+                    </a>
+                </li>
+                {% endif %}
+                <li>
+                    {% if user.is_authenticated %}
+                        <a href= "{% url 'accounts:logout' %}" >выйти</a>
+                    {% else %}
+                        <a href= "{% url 'accounts:login' %}" >войти</a>
+                    {% endif %}
+                </li>
         </ul>
     </div>
 </header>
