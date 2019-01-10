@@ -50,7 +50,7 @@
                 <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
 
                 <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <a href="{% url 'product_detail:product_detail' pk=product.pk %}">&gt;</a>
                     <h3>{{ product.name }}</h3>
                     <p>{{ product.product_category.name }}</p>
                 </div>
@@ -117,7 +117,7 @@
                         <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
         
                         <div class="product-text">
-                            <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                            <a href="{% url 'product_detail:product_detail' pk=product.pk %}">&gt;</a>
                             <h3>{{ product.name }}</h3>
                             <p>{{ product.product_category.name }}</p>
                         </div>
@@ -156,7 +156,7 @@
             <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
 
             <div class="product-text">
-                <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                <a href="{% url 'product_detail:product_detail' pk=product.pk %}">&gt;</a>
                 <h3>{{ product.name }}</h3>
                 <p>{{ product.product_category.name }}</p>
             </div>
@@ -173,7 +173,7 @@
                     <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
 
                 <div class="product-text">
-                    <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                    <a href="{% url 'product_detail:product_detail' pk=product.pk %}">&gt;</a>
                     <h3>{{ product.name }}</h3>
                     <p>{{ product.product_category.name }}</p>
                 </div>

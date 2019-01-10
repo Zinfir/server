@@ -3,13 +3,13 @@
 """
 import json
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 
 from product_list.models import Product_Category
 from product_detail.models import Product
 
 
-def product_detail(request):
+def product_detail(request, pk):
     """
     Рендеринг страницы детального описания продукта
 
@@ -19,18 +19,17 @@ def product_detail(request):
     Returns:
         product_detail.html: страница html с подробным описанием товара
     """
+
     context = {}
 
     with open('data/context.json') as file:
         context = json.load(file)
 
     products = []
-    products += Product.objects.filter(name='Red Wooden Chair')
-    products += Product.objects.filter(name='Blue Wooden Chair')
-    products += Product.objects.filter(name='Dark Blue Wooden Chair')
     products += Product.objects.filter(name='Hanging Lamp')
     products += Product.objects.filter(name='White Arm Chair')
     products += Product.objects.filter(name='Table Lamp')
+    products += Product.objects.filter(pk=pk)
 
     context["product_detail_products"] = products
 
@@ -41,5 +40,9 @@ def product_detail(request):
     context["categories_menu_links"] = categories_menu_links
 
     
+
+    obj = get_object_or_404(Product, pk=pk)
+
+    context["instance"] = obj
 
     return render(request, "product_detail/product_detail.html", context)

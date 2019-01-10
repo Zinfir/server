@@ -1,7 +1,7 @@
 {
     "links" : [
         { "href" : "main:main" , "name" : "main" },
-        { "href" : "product_list:product_list" , "name" : "product_list" },
+        { "href" : "product_list:all" , "name" : "product_list" },
         { "href" : "product_list:history" , "name" : "history" },
         { "href" : "product_list:showroom" , "name" : "showroom" },
         { "href" : "contacts:contacts" , "name" : "contacts" }
@@ -232,32 +232,32 @@
         {
             "name": "All",
             "description": "All category",
-            "href": "product_detail:all"
+            "href": "product_list:all"
         },
         {
             "name": "Home",
             "description": "Home category",
-            "href": "product_detail:home"
+            "href": "product_list:home"
         },
         {
             "name": "Office",
             "description": "Office category",
-            "href": "product_detail:office"
+            "href": "product_list:office"
         },
         {
             "name": "Modern",
             "description": "Modern category",
-            "href": "product_detail:modern"
+            "href": "product_list:modern"
         },
         {
             "name": "Furniture",
             "description": "Furniture category",
-            "href": "product_detail:furniture"
+            "href": "product_list:furniture"
         },
         {
             "name": "Classic",
             "description": "Classic category",
-            "href": "product_detail:classic"
+            "href": "product_list:classic"
         }
     ]
 }

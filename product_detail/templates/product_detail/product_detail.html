@@ -17,49 +17,46 @@
         </header>
     </div>
             
-    {% include 'product_detail/components/inc_categories_menu.html' %}
+    <div class="product_page_subheader padding-side">
+            <ul class=" product_page_menu ">
+            {% for category in categories_menu_links %}
+              <li>
+                  <a class="{% if instance.product_category.name|lower == category.name|lower %}
+                  active_submenu_link
+                  {% else %}
+                  submenu-link
+                  {% endif %}"
+                  " href="{% url category.href %}">{{ category.name|upper }}</a>
+              </li>
+            {% endfor %}
+            </ul>
+          </div>
 
     <div class="product_details_container padding-side">
 
         <div class="product_images">
             {% for product in product_detail_products %}
-            {% if forloop.counter0 == 0 %}
+            {% if product.pk == instance.pk and forloop.counter0 > 2 %}
                 <div class="product_detailed_image">
-                <a href="{% url 'product_detail:product_detail' %}">
+                <a href="{% url 'product_detail:product_detail' pk=instance.pk %}">
                     <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
                 </a>
                 </div>
             {% endif %}
             {% endfor %}
-
-            <div class="other_product_images">
-                {% for product in product_detail_products %}
-                {% if forloop.counter0 > 0 and forloop.counter0 < 3 %}
-                    <a href="{% url 'product_detail:product_detail' %}">
-                        <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
-                    </a>
-                {% endif %}
-            {% endfor %}
-            </div>
         </div>
 
         <div class="product_info">
-            <h2>Product</h2>
-            <h3>HOT DEAL</h3>
+            <h2>{{ instance.name }}</h2>
+            <h3>{{ instance.special_offer }}</h3>
             <div class="price-container">
                 <p class="price-text">$</p>
-                <p class="price"> 36.7</p>
+                <p class="price"> {{ instance.price }}</p>
                 <p class="price-text">/sq</p>
             </div>
 
-            <a class="product_order_button" href="{% url 'product_detail:product_detail' %}">Order Us<img src="{% static 'product_detail/img/arrow1.png' %}" alt="arrow"></a>
-            <p class="product-page-text">The majesty of Mountains - Ugmonk style. <br><br>
-
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-             Maiores, amet quae temporibus odit pariatur rerum, exercitationem quam voluptatum odio non quos eaque magnam facere voluptatibus. <br><br>
-
-             Minima maiores, perferendis voluptatibus hic autem sed pariatur quod vel deserunt at minus officiis illo aut tempore saepe quidem dolores voluptas quibusdam alias, neque quae! <br><br>
-            </p>
+            <a class="product_order_button" href="{% url 'product_detail:product_detail' pk=instance.pk %}">Order Us<img src="{% static 'product_detail/img/arrow1.png' %}" alt="arrow"></a>
+            <p class="product-page-text">{{ instance.description }}</p>
         </div>
     </div>
 
@@ -74,12 +71,12 @@
 
                 {% for product in product_detail_products %}
 
-                {% if forloop.counter0 > 2 %}
+                {% if forloop.counter0 < 3 %}
                 <div class="block product-hover">
                         <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
         
                         <div class="product-text">
-                            <a href="{% url 'product_detail:product_detail' %}">&gt;</a>
+                            <a href="{% url 'product_detail:product_detail' pk=product.pk %}">&gt;</a>
                             <h3>{{ product.name }}</h3>
                             <p>{{ product.product_category.name }}</p>
                         </div>
