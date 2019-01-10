@@ -8,10 +8,7 @@ from accounts.models import Account
 def profile(request, pk):
     acc = get_object_or_404(Account, pk=pk)
     
-    return render(request, "accounts/profile.html", {
-            'instance': acc,
-            'image': acc.avatar
-            })
+    return render(request, "accounts/profile.html", {'instance': acc})
 
 
 def login_view(request):
@@ -66,3 +63,16 @@ def account_update(request, pk):
             return redirect(success_url)
 
     return render(request, template_name, {'form': form})
+
+
+def account_delete(request, pk):
+    template_name = "accounts/delete.html"
+    success_url = reverse_lazy('main:main')
+    acc = get_object_or_404(Account, pk=pk)
+
+    if request.method == 'POST':
+        acc.delete()
+
+        return redirect(success_url)
+
+    return render(request, template_name, {'instance': acc})

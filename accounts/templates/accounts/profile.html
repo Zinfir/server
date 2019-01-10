@@ -26,5 +26,8 @@
         <button value="Update">
             <a href="{% url 'accounts:update' pk=instance.pk %}">Update</a>
         </button>
+        <button value="Delete">
+            <a href="{% url 'accounts:delete' pk=instance.pk %}">Delete</a>
+        </button>
     </form>
 {% endblock %}
