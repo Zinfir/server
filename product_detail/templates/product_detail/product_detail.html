@@ -35,18 +35,24 @@
     <div class="product_details_container padding-side">
 
         <div class="product_images">
-            {% for product in product_detail_products %}
-            {% if product.pk == instance.pk and forloop.counter0 > 2 %}
                 <div class="product_detailed_image">
                 <a href="{% url 'product_detail:product_detail' pk=instance.pk %}">
-                    <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
+                    <img src="/media/{{ instance.image }}" alt="{{ instance.short_desc }}">
                 </a>
                 </div>
-            {% endif %}
-            {% endfor %}
         </div>
 
         <div class="product_info">
+                <form class="model-form" method="POST" action="">
+                        {% csrf_token %}
+                
+                        <button value="Update">
+                            <a href="{% url 'product_detail:update' pk=instance.pk %}">Update</a>
+                        </button>
+                        <button value="Delete">
+                            <a href="{% url 'product_detail:delete' pk=instance.pk %}">Delete</a>
+                        </button>
+                    </form>
             <h2>{{ instance.name }}</h2>
             <h3>{{ instance.special_offer }}</h3>
             <div class="price-container">

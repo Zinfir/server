@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %} 
-    Delete Account
+    Delete Category
 {% endblock %}
    
 {% block styles %}
@@ -16,10 +16,10 @@
 
     <form class="model-form" method="POST" action="">
         {% csrf_token %}
-        <h2>Delete {{ instance.username }}?</h2>
+        <h2>Delete {{ instance.name }}?</h2>
         <input type="submit" value="Yes">
         <button value="No">
-            <a href="{% url 'main:main'%}">No</a>
+            <a href="{% url 'product_list:product_category' pk=1 %}">No</a>
         </button>
     </form>
 {% endblock %}

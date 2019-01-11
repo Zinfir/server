@@ -4,9 +4,11 @@
 import json
 
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
+from django.urls import reverse_lazy
 
 from product_list.models import Product_Category
 from product_detail.models import Product
+from product_detail.forms import Product_Form
 
 
 def product_detail(request, pk):
@@ -29,7 +31,6 @@ def product_detail(request, pk):
     products += Product.objects.filter(name='Hanging Lamp')
     products += Product.objects.filter(name='White Arm Chair')
     products += Product.objects.filter(name='Table Lamp')
-    products += Product.objects.filter(pk=pk)
 
     context["product_detail_products"] = products
 
@@ -42,3 +43,51 @@ def product_detail(request, pk):
     context["instance"] = obj
 
     return render(request, "product_detail/product_detail.html", context)
+
+
+def product_create(request):
+
+    template_name = "product_detail/product_create.html"
+    success_url = reverse_lazy('product_list:product_category', kwargs={'pk': 1})
+    form = Product_Form(request.POST)
+
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+
+            return redirect(success_url)
+
+    return render(request, template_name, {'form': form})
+
+
+def product_update(request, pk):
+    template_name = "product_detail/product_create.html"
+    success_url = reverse_lazy('product_detail:product_detail', kwargs={'pk': pk})
+    prod = get_object_or_404(Product, pk=pk)
+    form = Product_Form(instance=prod)
+
+    if request.method == 'POST':
+        form = Product_Form(
+            request.POST,
+            instance=prod
+        )
+
+        if form.is_valid():
+            form.save()
+
+            return redirect(success_url)
+
+    return render(request, template_name, {'form': form})
+
+
+def product_delete(request, pk):
+    template_name = "product_detail/product_delete.html"
+    success_url = reverse_lazy('product_list:product_category', kwargs={'pk': 1})
+    obj = get_object_or_404(Product, pk=pk)
+
+    if request.method == 'POST':
+        obj.delete()
+
+        return redirect(success_url)
+
+    return render(request, template_name, {'instance': obj})

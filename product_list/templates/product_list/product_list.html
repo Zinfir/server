@@ -34,13 +34,14 @@
                         " href="{% url 'product_list:product_category' pk=category.pk %}">{{ category.name|upper }}</a>
                     </li>
                     {% endfor %}
+                    <li><a class="submenu-link products-menu-item"" href="{% url 'product_list:category_list' %}">Category list</a></li>
             </ul>
         </div>
 
         <div class="product-box">
-                {% for product in product_list_products %}
+                {% for product in product_list_products reversed %}
 
-                {% if forloop.counter0 < 6 %}
+                {% if forloop.counter0 > 1 %}
                 <div class="block product-hover">
                         <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
         

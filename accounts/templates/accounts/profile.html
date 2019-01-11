@@ -13,13 +13,15 @@
 {% block content %}
 
 {% include 'server/components/inc_menu.html' %}
-
-    <p>{{ instance.username|default:'default_username' }}</p>
-    <p>{{ instance.first_name|default:'default_first_name' }}</p>
-    <p>{{ instance.last_name|default:'default_last_name' }}</p>
-    <p>{{ instance.email|default:'default_email' }}</p>
-    <p>{{ instance.phone|default:'default_phone' }}</p>
-    <p>{{ instance.avatar|default:'default_avatar' }}</p>
+    <a href="{% url 'product_detail:product_detail' pk=instance.pk %}">
+        <img src="/media/{{ instance.avatar }}" alt="avatar">
+    </a>
+    <p>Username: {{ instance.username|default:'default_username' }}</p>
+    <p>First name: {{ instance.first_name|default:'default_first_name' }}</p>
+    <p>Last name: {{ instance.last_name|default:'default_last_name' }}</p>
+    <p>email: {{ instance.email|default:'default_email' }}</p>
+    <p>phone: {{ instance.phone|default:'default_phone' }}</p>
+    
     <form class="model-form" method="POST" action="">
         {% csrf_token %}
 

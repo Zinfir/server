@@ -7,7 +7,7 @@ from accounts.models import Account
 
 def profile(request, pk):
     acc = get_object_or_404(Account, pk=pk)
-    
+
     return render(request, "accounts/profile.html", {'instance': acc})
 
 
