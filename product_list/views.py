@@ -1,11 +1,11 @@
 import json
 
-from django.shortcuts import render
+from django.shortcuts import render, get_list_or_404, get_object_or_404
 
 from product_list.models import Product_Category
 from product_detail.models import Product
 
-def product_list(request):
+def product_list(request, pk):
 
     context = {}
 
@@ -24,10 +24,12 @@ def product_list(request):
 
     context["product_list_products"] = products
 
-    categories_menu_links = []
-
-    categories_menu_links += Product_Category.objects.all()
+    categories_menu_links = get_list_or_404(Product_Category)
 
     context["categories_menu_links"] = categories_menu_links
+
+    obj = get_object_or_404(Product_Category, pk=pk)
+
+    context["instance"] = obj
 
     return render(request, "product_list/product_list.html", context)

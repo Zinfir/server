@@ -34,8 +34,8 @@
         <div class="menu-slider-row-container">
 
             <ul class="menu-slider-row">
-                <li><a class="menu-featured slider-row-menu-active" href="{% url 'product_list:product_list' %}">Featured</a></li>
-                <li><a class="menu-new" href="{% url 'product_list:product_list' %}">New</a></li>
+                <li><a class="menu-featured slider-row-menu-active" href="{% url 'product_list:product_category' pk=1 %}">Featured</a></li>
+                <li><a class="menu-new" href="{% url 'product_list:product_category' pk=2 %}">New</a></li>
             </ul>
 
             {% include 'main/components/inc_explore-link.html' %}
@@ -104,7 +104,7 @@
 
     <div class="slider-table">
         <div class="slider-table-header">
-            <a href="{% url 'product_list:product_list' %}" class="trending_product">Trending Products</a>
+            <a href="{% url 'product_list:product_category' pk=1 %}" class="trending_product">Trending Products</a>
 
             {% include 'main/components/inc_explore-link.html' %}
         </div>

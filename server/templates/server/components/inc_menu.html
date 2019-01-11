@@ -14,7 +14,13 @@
                     {% else %}
                     menu-link
                     {% endif %}"
-                    " href="{% url link.href %}">
+                    href="
+                    {% if link.name == 'product_list' %}
+                    {% url link.href pk=1 %}
+                    {% else %}
+                    {% url link.href %}
+                    {% endif %}
+                    ">
                     {% if link.name == 'main' %}
                     {{ 'home'|upper }}
                     {% elif link.name == 'product_list' %}

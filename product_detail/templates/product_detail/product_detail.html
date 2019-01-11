@@ -21,12 +21,12 @@
             <ul class=" product_page_menu ">
             {% for category in categories_menu_links %}
               <li>
-                  <a class="{% if instance.product_category.name|lower == category.name|lower %}
+                  <a class="{% if instance.product_category.pk == category.pk %}
                   active_submenu_link
                   {% else %}
                   submenu-link
                   {% endif %}"
-                  " href="{% url category.href %}">{{ category.name|upper }}</a>
+                  " href="{% url 'product_list:product_category' pk=category.pk %}">{{ category.name|upper }}</a>
               </li>
             {% endfor %}
             </ul>
@@ -62,7 +62,7 @@
 
     <div class="slider-table">
         <div class="slider-table-header">
-            <a href="{% url 'main:main' %}" class="trending_product">Trending Products</a>
+            <a href="{% url 'product_list:product_category' pk=1 %}" class="trending_product">Trending Products</a>
 
             {% include 'product_detail/components/inc_explore-link.html' %}
         </div>

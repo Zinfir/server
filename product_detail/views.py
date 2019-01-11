@@ -33,13 +33,9 @@ def product_detail(request, pk):
 
     context["product_detail_products"] = products
 
-    categories_menu_links = []
-
-    categories_menu_links += Product_Category.objects.all()
+    categories_menu_links = get_list_or_404(Product_Category)
 
     context["categories_menu_links"] = categories_menu_links
-
-    
 
     obj = get_object_or_404(Product, pk=pk)
 

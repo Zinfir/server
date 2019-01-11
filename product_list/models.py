@@ -11,11 +11,6 @@ class Product_Category(models.Model):
         blank = True,
         null = True
         )
-    href = models.CharField(
-        max_length = 250,
-        blank = True,
-        null = True
-        )
     modified = models.DateTimeField(
         auto_now=True
     )

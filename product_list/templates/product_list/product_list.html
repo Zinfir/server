@@ -26,12 +26,12 @@
             <ul class="products-menu">
                     {% for category in categories_menu_links %}
                     <li>
-                        <a class="{% if request.resolver_match.url_name == category.name|lower %}
+                        <a class="{% if instance.pk == category.pk %}
                         products-menu-active
                         {% endif %}
                         submenu-link
                         products-menu-item"
-                        " href="{% url category.href %}">{{ category.name|upper }}</a>
+                        " href="{% url 'product_list:product_category' pk=category.pk %}">{{ category.name|upper }}</a>
                     </li>
                     {% endfor %}
             </ul>
@@ -60,7 +60,7 @@
         </div>
 
         <div class="refresh-container">
-            <a class="refresh-link" href="{% url 'product_list:product_list' %}"><img class="refresh-img" src="{% static 'product_list/img/refresh.png' %}" alt="refresh"></a>
+            <a class="refresh-link" href="{% url 'product_list:product_category' pk=instance.pk %}"><img class="refresh-img" src="{% static 'product_list/img/refresh.png' %}" alt="refresh"></a>
         </div>
     </div>
     
