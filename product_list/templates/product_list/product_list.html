@@ -39,27 +39,61 @@
         </div>
 
         <div class="product-box">
-                {% for product in product_list_products reversed %}
+            {% for product in results %}
 
-                {% if forloop.counter0 > 1 %}
-                <div class="block product-hover">
-                        <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
-        
-                        <div class="product-text">
-                            <a href="{% url 'product_detail:product_detail' pk=product.pk %}">&gt;</a>
-                            <h3>{{ product.name }}</h3>
-                            <p>{{ product.product_category.name }}</p>
-                        </div>
+            {% if product %}
+            <div class="block product-hover">
+                    <img class="product-box-img" src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
+    
+                    <div class="product-text">
+                        <a href="{% url 'product_detail:product_detail' pk=product.pk %}">&gt;</a>
+                        <h3>{{ product.name }}</h3>
+                        <p>{{ product.product_category.name }}</p>
                     </div>
-                {% endif %}
+                </div>
+            {% endif %}
 
-                {% endfor %}
-
-                {% for product in product_list_products %}
-
-                {% endfor %}
+            {% endfor %}
         </div>
 
+        <div class="pagination__box">
+            <ul class="pagination__product_list">
+                {% if results.has_previous %}
+                <li>
+                    <a href="?page={{ results.previous_page_number }}">
+                        Previous &nbsp;|
+                    </a>
+                </li>
+                {% endif %}
+            
+                {% for num in results.paginator.page_range %}
+                <li>
+                    &nbsp; 
+                    <a
+                        href="?page={{ num }}"
+                        class="
+                        pagination__control
+                        {% if num == results.number %}
+                        active__pagination_link
+                        {% endif %}
+                        "
+                    >
+                    {{num}} 
+                    </a>
+                    &nbsp; |
+                </li>
+                {% endfor %}
+            
+                {% if results.has_next %}
+                <li>
+                    <a href="?page={{ results.next_page_number }}">
+                        Next
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        
         <div class="refresh-container">
             <a class="refresh-link" href="{% url 'product_list:product_category' pk=instance.pk %}"><img class="refresh-img" src="{% static 'product_list/img/refresh.png' %}" alt="refresh"></a>
         </div>
@@ -70,11 +104,11 @@
     
     <div class="slider-two-sides">
         
-        {% for product in product_list_products reversed %}
+        {% for product in static_products_on_page %}
 
         {% if forloop.counter0 == 0 %}
 
-        <div class="slider-left">
+        <div class="slider-left" style="background-image: url({{product.image.url}});">
             <h3>{{ product.special_offer }}</h3>
 
             <h2>{{ product.name }}</h2>
@@ -88,11 +122,11 @@
 
         {% endfor %}
 
-        {% for product in product_list_products reversed %}
+        {% for product in static_products_on_page %}
 
         {% if forloop.counter0 == 1 %}
 
-        <div class="slider-right">
+        <div class="slider-right" style="background-image: url({{product.image.url}});">
             <h3>{{ product.special_offer }}</h3>
 
             <h2>{{ product.name }}</h2>

@@ -248,7 +248,7 @@ body {
 .slider-home {
     position: relative;
     height: 800px;
-    background-image: url(/static/server/img/slider-img.jpg);
+
 }
 
 .padding-side {
@@ -507,6 +507,7 @@ body {
     margin-top: 50px;
 }
 
+
 .product-text {
     transition: 0.5s;
     display: flex;
@@ -579,14 +580,13 @@ body {
 }
 
 .slider-two-sides .slider-left {
-    background-image: url(/static/server/img/promo-img1.jpg);
+
     width: 683px;
     padding-left: 51px;
     padding-right: 51px;
 }
 
 .slider-two-sides .slider-right {
-    background-image: url(/static/server/img/promo-img2.jpg);
     width: 683px;
     padding-left: 51px;
     padding-right: 51px;
@@ -668,11 +668,17 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding-bottom: 50px;
 }
 
 .block {
     width: 370px;
     height: 370px;
+}
+
+.block img {
+    width: 100%;
+    height: auto;
 }
 
 .refresh-container {
@@ -696,7 +702,6 @@ body {
     display: block;
     position: relative;
     height: 800px;
-    background-image: url(/static/server/img/slider2.jpg);
     padding-left: 98px;
     padding-right: 98px;
     padding-top: 283px;
@@ -913,6 +918,16 @@ body {
     height: 900px;
 }
 
+.product_detailed_image {
+    width: 570px;
+    height: 570px;
+}
+
+.product_detailed_image img {
+    width: 100%;
+    height: auto;
+}
+
 .product_images {
     display: flex;
     flex-direction: column;
@@ -1073,4 +1088,35 @@ body {
     font-size: 18px;
     font-weight: 700;
     text-align: left;
+}
+
+.pagination__box {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination__product_list {
+    display: flex;
+}
+
+.pagination__product_list li {
+    color: #8c8c8c;
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.pagination__product_list a {
+    color: #8c8c8c;
+    font-size: 18px;
+    font-weight: 400;
+    text-decoration: none;
+}
+
+.pagination__product_list .active__pagination_link {
+    color: black;
+    font-weight: 700;
+}
+
+.pagination__product_list li {
+    list-style-type: none;
 }

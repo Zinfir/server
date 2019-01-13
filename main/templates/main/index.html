@@ -9,8 +9,9 @@
 {% block content %}
 
 <div class="top">
-    <div class="slider-home padding-side">
-
+    {% for product in main_title_product %}
+    <div class="slider-home padding-side" style="background-image: url({{product.image.url}});">
+    {% endfor %}
         {% include 'server/components/inc_menu.html' %}
 
         <div class="slider-home-text">
@@ -68,7 +69,7 @@
             
                     {% if forloop.counter0 == 4 %}
             
-                    <div class="slider-left">
+                    <div class="slider-left" style="background-image: url({{product.image.url}});">
                         <h3>{{ product.special_offer }}</h3>
             
                         <h2>{{ product.name }}</h2>
@@ -86,7 +87,7 @@
             
                     {% if forloop.counter0 == 5 %}
             
-                    <div class="slider-right">
+                    <div class="slider-right" style="background-image: url({{product.image.url}});">
                         <h3>{{ product.special_offer }}</h3>
             
                         <h2>{{ product.name }}</h2>
@@ -131,22 +132,22 @@
         </div>
     </div>
 
-    <div class="slider-one-product">
-        {% for product in main_products %}
-
-        {% if forloop.counter0 == 12 %}
+    {% for product in main_products %}
+    {% if forloop.counter0 == 12 %}
+    <div class="slider-one-product" style="background-image: url({{product.image.url}});">
+        
         <div class="slider-one-product-text">
             <h3>{{ product.special_offer }}</h3>
             <h2>{{ product.name }}</h2>
             <p>{{ product.description }}</p>
             {% include 'main/components/inc_order_button.html' %}
         </div>
-        {% endif %}
-
-        {% endfor %}
+        
 
         {% include 'main/components/inc_pagination.html' %}
     </div>
+    {% endif %}
+    {% endfor %}
 
     <div class="slider-mixed-table padding-side">
         <div class="big-box product-hover">

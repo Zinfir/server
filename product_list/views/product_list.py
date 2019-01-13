@@ -1,41 +1,33 @@
 import json
-
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.urls import reverse_lazy
 from product_list.models import Product_Category
 from product_detail.models import Product
 from product_list.forms import Category_Form
 
+
 def product_list(request, pk):
 
-    context = {}
+    query = get_list_or_404(Product)
+    paginator = Paginator(query, 6)
+    page = request.GET.get('page')
+    items = paginator.get_page(page)
 
-    with open('data/context.json') as file:
-        context = json.load(file)
-
-    products = []
-    products += Product.objects.filter(name='Hanging Lamp')
-    products += Product.objects.filter(name='White Arm Chair')
-    products += Product.objects.filter(name='Table Lamp')
-    products += Product.objects.filter(name='Wall Lamp')
-    products += Product.objects.filter(name='Mortar and Pestle')
-    products += Product.objects.filter(name='White Vase')
-    products += Product.objects.filter(pk__gt=22)
-    products += Product.objects.filter(name='Red Iron Chair')
-    products += Product.objects.filter(name='Wooden Arm Chair')
-    
-
-    context["product_list_products"] = products
+    static_products_on_page = []
+    static_products_on_page += Product.objects.filter(name='Red Iron Chair')
+    static_products_on_page += Product.objects.filter(name='Wooden Arm Chair')
 
     categories_menu_links = get_list_or_404(Product_Category)
-
-    context["categories_menu_links"] = categories_menu_links
-
     obj = get_object_or_404(Product_Category, pk=pk)
 
-    context["instance"] = obj
-
-    return render(request, "product_list/product_list.html", context)
+    return render(request, "product_list/product_list.html", {
+        "results": items,
+        "static_products_on_page": static_products_on_page,
+        "categories_menu_links": categories_menu_links,
+        "instance": obj
+    }
+    )
 
 
 def category_detail(request, pk):
@@ -96,4 +88,4 @@ def category_list(request):
 
     list = get_list_or_404(Product_Category)
 
-    return render(request, "product_list/category_list.html", {"list": list})
+    return render(request,"product_list/category_list.html",{"list": list})

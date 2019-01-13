@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_list_or_404, get_object_or_404
 
 from django.http import HttpResponse, JsonResponse
 
@@ -8,6 +8,8 @@ from product_list.models import Product_Category
 from product_detail.models import Product
 
 import json
+
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -45,9 +47,16 @@ def index(request):
     context["main_products"] = products
 
     main_title_product = []
-
     main_title_product += Product.objects.filter(name='Fishnet Chair')
-
     context["main_title_product"] = main_title_product
 
     return render(request, 'main/index.html', context)
+
+
+def test(request):
+    query = get_list_or_404(Product)
+    paginator = Paginator(query, 6)
+    page = request.GET.get('page')
+    items = paginator.get_page(page)
+
+    return render(request, "main/test.html", {'results': items})
