@@ -5,11 +5,53 @@ from django.urls import reverse_lazy
 from product_list.models import Product_Category
 from product_detail.models import Product
 from product_list.forms import Category_Form
+from django.views.generic import (
+    ListView, DetailView, CreateView, 
+    UpdateView, DeleteView
+)
+
+
+class CategoryListView(ListView):
+    model = Product_Category
+    template_name = 'product_list/category_list.html'
+    context_object_name = 'list'
+
+
+class CategoryDetailView(DetailView):
+    model = Product_Category
+    template_name = 'product_list/category_detail.html'
+    context_object_name = 'instance'
+
+
+class CategoryCreateView(CreateView):
+    model = Product_Category
+    template_name = 'product_list/category_create.html'
+    form_class = Category_Form
+    success_url = reverse_lazy('product_list:category_list')
+
+
+class CategoryUpdateView(UpdateView):
+    model = Product_Category
+    template_name = 'product_list/category_create.html'
+    form_class = Category_Form
+    success_url = reverse_lazy('product_list:category_list')
+
+
+class CategoryDeleteView(DeleteView):
+    model = Product_Category
+    template_name = 'product_list/category_delete.html'
+    context_object_name = 'instance'
+    success_url = reverse_lazy('product_list:category_list')
 
 
 def product_list(request, pk):
 
-    query = get_list_or_404(Product)
+    context = {}
+
+    with open('data/context.json') as file:
+        context = json.load(file)
+
+    query = Product.objects.filter(is_active=True)
     paginator = Paginator(query, 6)
     page = request.GET.get('page')
     items = paginator.get_page(page)
@@ -21,13 +63,12 @@ def product_list(request, pk):
     categories_menu_links = get_list_or_404(Product_Category)
     obj = get_object_or_404(Product_Category, pk=pk)
 
-    return render(request, "product_list/product_list.html", {
-        "results": items,
-        "static_products_on_page": static_products_on_page,
-        "categories_menu_links": categories_menu_links,
-        "instance": obj
-    }
-    )
+    context["results"] = items
+    context["static_products_on_page"] = static_products_on_page
+    context["categories_menu_links"] = categories_menu_links
+    context["instance"] = obj
+
+    return render(request, "product_list/product_list.html", context)
 
 
 def category_detail(request, pk):
@@ -88,4 +129,4 @@ def category_list(request):
 
     list = get_list_or_404(Product_Category)
 
-    return render(request,"product_list/category_list.html",{"list": list})
+    return render(request, "product_list/category_list.html", {"list": list})

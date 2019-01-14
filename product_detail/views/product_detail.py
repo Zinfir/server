@@ -5,7 +5,12 @@ import json
 
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.urls import reverse_lazy
-
+from django.views.generic import (
+    ListView, DetailView, CreateView, 
+    UpdateView, DeleteView
+)
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from product_list.models import Product_Category
 from product_detail.models import Product
 from product_detail.forms import Product_Form
@@ -38,11 +43,33 @@ def product_detail(request, pk):
 
     context["categories_menu_links"] = categories_menu_links
 
-    obj = get_object_or_404(Product, pk=pk)
-
+    obj = get_object_or_404(Product, pk=pk, is_active=True)
     context["instance"] = obj
 
     return render(request, "product_detail/product_detail.html", context)
+
+
+class ProductCreateView(LoginRequiredMixin, CreateView):
+    model = Product
+    template_name = "product_detail/product_create.html"
+    form_class = Product_Form
+    success_url = reverse_lazy('product_list:product_category', kwargs={'pk': 1})
+    login_url = reverse_lazy('accounts:login')
+
+
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    queryset = Product.objects.filter(is_active=True)
+    template_name = "product_detail/product_create.html"
+    form_class = Product_Form
+    success_url = reverse_lazy('product_list:product_category', kwargs={'pk': 1})
+    login_url = reverse_lazy('accounts:login')
+
+
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    queryset = Product.objects.filter(is_active=True)
+    template_name = 'product_detail/product_delete.html'
+    success_url = reverse_lazy('product_list:product_category', kwargs={'pk': 1})
+    login_url = reverse_lazy('accounts:login')
 
 
 def product_create(request):
@@ -80,13 +107,16 @@ def product_update(request, pk):
     return render(request, template_name, {'form': form})
 
 
+@login_required(login_url=reverse_lazy('accounts:login'))
 def product_delete(request, pk):
     template_name = "product_detail/product_delete.html"
     success_url = reverse_lazy('product_list:product_category', kwargs={'pk': 1})
-    obj = get_object_or_404(Product, pk=pk)
+    obj = get_object_or_404(Product, pk=pk, is_active=True)
 
     if request.method == 'POST':
-        obj.delete()
+        obj.is_active = False
+
+        obj.save()
 
         return redirect(success_url)
 
