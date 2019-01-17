@@ -2,7 +2,7 @@
 Контроллер для страницы детального описания продукта
 """
 import json
-
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import (
@@ -48,6 +48,31 @@ class ProductDeleteView(LoginRequiredMixin, AdminGroupRequired, DeleteView):
     success_url = reverse_lazy('product_list:product_category', kwargs={'pk': 1})
     login_url = reverse_lazy('accounts:login')
     context_object_name = 'instance'
+
+
+def product_list(request, pk):
+
+    context = {}
+
+    if pk == 1:
+        query = Product.objects.filter(is_active=True)
+    else:
+        query = Product.objects.filter(is_active=True, product_category=pk)
+    paginator = Paginator(query, 6)
+    page = request.GET.get('page')
+    items = paginator.get_page(page)
+
+    static_products_on_page = []
+    static_products_on_page += Product.objects.filter(name='Red Iron Chair')
+    static_products_on_page += Product.objects.filter(name='Wooden Arm Chair')
+
+    obj = get_object_or_404(Product_Category, pk=pk)
+
+    context["results"] = items
+    context["static_products_on_page"] = static_products_on_page
+    context["instance"] = obj
+
+    return render(request, "product_detail/product_list.html", context)
 
 
 def product_detail(request, pk):
