@@ -43,15 +43,14 @@ class CategoryDeleteView(DeleteView):
     context_object_name = 'instance'
     success_url = reverse_lazy('product_list:category_list')
 
-
 def product_list(request, pk):
 
     context = {}
 
-    with open('data/context.json') as file:
-        context = json.load(file)
-
-    query = Product.objects.filter(is_active=True)
+    if pk == 1:
+        query = Product.objects.filter(is_active=True)
+    else:
+        query = Product.objects.filter(is_active=True, product_category=pk)
     paginator = Paginator(query, 6)
     page = request.GET.get('page')
     items = paginator.get_page(page)
@@ -60,12 +59,10 @@ def product_list(request, pk):
     static_products_on_page += Product.objects.filter(name='Red Iron Chair')
     static_products_on_page += Product.objects.filter(name='Wooden Arm Chair')
 
-    categories_menu_links = get_list_or_404(Product_Category)
     obj = get_object_or_404(Product_Category, pk=pk)
 
     context["results"] = items
     context["static_products_on_page"] = static_products_on_page
-    context["categories_menu_links"] = categories_menu_links
     context["instance"] = obj
 
     return render(request, "product_list/product_list.html", context)

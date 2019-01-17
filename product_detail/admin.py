@@ -13,7 +13,7 @@ class ProductAdmin(admin.ModelAdmin):
 
     list_filter = [
         'product_category', 'image',
-        'created', 'modified', 'is_active'
+        'created', 'modified', 'is_active', 'special_offer',
     ]
 
     search_fields = [
@@ -23,7 +23,7 @@ class ProductAdmin(admin.ModelAdmin):
     fieldsets = (
         (
             None, {
-                'fields': ('name', 'product_category', 'is_active')
+                'fields': ('name', 'product_category', 'special_offer', 'is_active')
             }
         ),
         (

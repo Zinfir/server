@@ -899,6 +899,29 @@ body {
     color: darkgrey;
 }
 
+#rest_page_menu {
+    display: flex;
+    justify-content: space-between;
+}
+
+#rest_page_menu li {
+    list-style-type: none;
+}
+
+#rest_page_menu .submenu-link {
+    transition: all 0.3s;
+    color: #6c6c6c;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 10px 13px;
+    display: block;
+}
+
+#rest_page_menu .submenu-link:hover {
+    color: darkgrey;
+}
+
 .active_submenu_link {
     transition: all 0.3s;
     color: #212121;

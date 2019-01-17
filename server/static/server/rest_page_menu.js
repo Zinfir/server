@@ -10,6 +10,6 @@ const Product_Category = ({url, name, description, my_absolute_url}) => (
 const renderData = res => {
     menuHtml = res.data.results.map(Product_Category)
         .join('')
-    menu = document.getElementById('rest_menu')
+    menu = document.getElementById('rest_page_menu')
     menu.innerHTML += menuHtml
 }

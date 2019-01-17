@@ -18,18 +18,13 @@
     </div>
             
     <div class="product_page_subheader padding-side">
-            <ul class=" product_page_menu ">
-            {% for category in categories_menu_links %}
-              <li>
-                  <a class="{% if instance.product_category.pk == category.pk %}
-                  active_submenu_link
-                  {% else %}
-                  submenu-link
-                  {% endif %}"
-                  " href="{% url 'product_list:product_category' pk=category.pk %}">{{ category.name|upper }}</a>
-              </li>
-            {% endfor %}
-            </ul>
+            <ul id="rest_page_menu">
+                </ul>
+                <script type="text/javascript" src="{% static 'server/rest_page_menu.js' %}"></script>
+                <script>
+                    axios.get('http://localhost:8000/api/categories/')
+                    .then(renderData)
+                </script>
           </div>
 
     <div class="product_details_container padding-side">
@@ -73,25 +68,13 @@
             {% include 'product_detail/components/inc_explore-link.html' %}
         </div>
 
-        <div class="product-box">
-
-                {% for product in product_detail_products %}
-
-                {% if forloop.counter0 < 3 %}
-                <div class="block product-hover">
-                        <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}">
-        
-                        <div class="product-text">
-                            <a href="{% url 'product_detail:product_detail' pk=product.pk %}">&gt;</a>
-                            <h3>{{ product.name }}</h3>
-                            <p>{{ product.product_category.name }}</p>
-                        </div>
-                    </div>
-                {% endif %}
-
-                {% endfor %}
-
+        <div id="detail_page_extra_products" class="product-box">                   
         </div>
+        <script type="text/javascript" src="{% static 'server/rest_detail_page_products.js' %}"></script>
+        <script>
+            axios.get('http://localhost:8000/api/products/')
+            .then(renderPageData)
+        </script>
 
         <div class="refresh-container">
         </div>

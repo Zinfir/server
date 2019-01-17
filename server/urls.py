@@ -17,8 +17,17 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework.routers import DefaultRouter
+from product_list.api.categories import CategoryViewSet
+from product_detail.api.products import ProductViewSet
 
-router = [
+
+router = DefaultRouter()
+router.register('categories', CategoryViewSet)
+router.register('products', ProductViewSet)
+
+
+default_router = [
     path('categories/', include('product_list.endpoints.categories'))
 ] 
 
@@ -29,7 +38,8 @@ urlpatterns = [
     path('product_detail/', include('product_detail.urls.product_detail')),
     path('contacts/', include('contacts.urls')),
     path('accounts/', include('accounts.urls')),
-    path('api/', include(router)),
+    path('default_api/', include(default_router)),
+    path('api/', include(router.urls)),
 ]
 
 if settings.DEBUG:

@@ -24,26 +24,14 @@
     
     <div class="slider-table padding-side">
         <div class="products-menu-container">
-                <!-- <ul id="rest_menu">
+                <ul id="rest_menu">
                 </ul>
                 <script type="text/javascript" src="{% static 'server/rest_menu.js' %}"></script>
                 <script>
                     axios.get('http://localhost:8000/api/categories/')
                     .then(renderData)
-                </script> -->
-            <ul class="products-menu">
-                    {% for category in categories_menu_links %}
-                    <li>
-                        <a class="{% if instance.pk == category.pk %}
-                        products-menu-active
-                        {% endif %}
-                        submenu-link
-                        products-menu-item"
-                        " href="{% url 'product_list:product_category' pk=category.pk %}">{{ category.name|upper }}</a>
-                    </li>
-                    {% endfor %}
-                    <li><a class="submenu-link products-menu-item"" href="{% url 'product_list:category_list' %}">Category list</a></li>
-            </ul>
+                </script>
+            
         </div>
 
         <div class="product-box">

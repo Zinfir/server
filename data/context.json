@@ -1,11 +1,4 @@
 {
-    "links" : [
-        { "href" : "main:main" , "name" : "main" },
-        { "href" : "product_list:product_category" , "name" : "product_list" },
-        { "href" : "main:history" , "name" : "history" },
-        { "href" : "main:showroom" , "name" : "showroom" },
-        { "href" : "contacts:contacts" , "name" : "contacts" }
-    ],
     "products" : [
         {
             "product_category" : "Modern",

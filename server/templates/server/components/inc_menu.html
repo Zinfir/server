@@ -7,30 +7,46 @@
         <a class="logo" href="{% url 'main:main' %}"><img src="{% static 'server/img/logo.png' %}" alt="logo"></a>
 
         <ul class="menu">
-                {% for link in links %}
                 <li>
-                    <a class="{% if request.resolver_match.url_name == link.name %}
+                    <a
+                        href="{% url 'main:main' %}"
+                        class="{% if request.resolver_match.url_name == 'main' %}
+                                active_link
+                            {% else %}
+                                menu-link
+                            {% endif %}"
+                    >
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'product_list:product_category' pk=1 %}" class="{% if request.resolver_match.url_name == 'product_category' %}
                     active_link
                     {% else %}
                     menu-link
-                    {% endif %}"
-                    href="
-                    {% if link.name == 'product_list' %}
-                    {% url link.href pk=1 %}
-                    {% else %}
-                    {% url link.href %}
-                    {% endif %}
-                    ">
-                    {% if link.name == 'main' %}
-                    {{ 'home'|upper }}
-                    {% elif link.name == 'product_list' %}
-                    {{ 'products'|upper }}
-                    {% else %}
-                    {{ link.name|upper }}
-                    {% endif %}
-                    </a>
+                    {% endif %}">Products</a>
                 </li>
-                {% endfor %}
+                <li>
+                    <a href="{% url 'main:history' %}" class="{% if request.resolver_match.url_name == 'history' %}
+                    active_link
+                    {% else %}
+                    menu-link
+                    {% endif %}">History</a>
+                </li>
+                <li>
+                    <a href="{% url 'main:showroom' %}" class="{% if request.resolver_match.url_name == 'showroom' %}
+                    active_link
+                    {% else %}
+                    menu-link
+                    {% endif %}">Showroom</a>
+                </li>
+                <li>
+                    <a href="{% url 'contacts:contacts' %}" class="{% if request.resolver_match.url_name == 'contacts' %}
+                    active_link
+                    {% else %}
+                    menu-link
+                    {% endif %}">Contacts</a>
+                </li>
                 <li><a class="search-link" href="{% url 'main:main' %}"><img src="{% static 'server/img/search.svg' %}" alt="search"></a></li>
                 {% if user.is_authenticated %}
                 <li>
