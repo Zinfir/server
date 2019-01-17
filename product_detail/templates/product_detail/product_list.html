@@ -97,45 +97,7 @@
     
     <div class="space">
     </div>
-    
-    <div class="slider-two-sides">
-        
-        {% for product in static_products_on_page %}
 
-        {% if forloop.counter0 == 0 %}
-
-        <div class="slider-left" style="background-image: url({{product.image.url}});">
-            <h3>{{ product.special_offer }}</h3>
-
-            <h2>{{ product.name }}</h2>
-
-            <p>{{ product.description }}</p>
-
-            {% include 'product_list/components/inc_order_button.html' %}
-        </div>
-
-        {% endif %}
-
-        {% endfor %}
-
-        {% for product in static_products_on_page %}
-
-        {% if forloop.counter0 == 1 %}
-
-        <div class="slider-right" style="background-image: url({{product.image.url}});">
-            <h3>{{ product.special_offer }}</h3>
-
-            <h2>{{ product.name }}</h2>
-
-            <p>{{ product.description }}</p>
-
-            {% include 'product_list/components/inc_order_button.html' %}
-        </div>
-
-        {% endif %}
-
-        {% endfor %}
-    </div>
 </div>
 
 {% endblock %}

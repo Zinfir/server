@@ -7,13 +7,12 @@ from product_list.views import (
     CategoryCreateView, CategoryUpdateView, CategoryDeleteView,
     CategoryListView,
     )
-from product_detail.views import product_list
+from product_detail.views import ProductListView, product_list
 
 app_name = 'product_list'
 
 
 urlpatterns = [
-    path('', product_list, name='product_list'),
     path('<int:pk>', product_list, name='product_category'),
     path('detail/<int:pk>', CategoryDetailView.as_view(), name='category_detail'),
     path('delete/<int:pk>', CategoryDeleteView.as_view(), name='category_delete'),

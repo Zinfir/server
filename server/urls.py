@@ -19,13 +19,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework.routers import DefaultRouter
 from product_list.api.categories import CategoryViewSet
-from product_detail.api.products import ProductViewSet
+from product_detail.api.products import ProductViewSet, ProductListLeftViewSet, ProductListRightViewSet
 
 
 router = DefaultRouter()
 router.register('categories', CategoryViewSet)
 router.register('products', ProductViewSet)
-
 
 default_router = [
     path('categories/', include('product_list.endpoints.categories'))

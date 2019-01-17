@@ -17,6 +17,13 @@ from product_detail.models import Product
 from product_detail.forms import Product_Form
 
 
+class ProductListView(LoginRequiredMixin, ListView):
+    model = Product
+    template_name = "product_detail/product_list.html"
+    context_object_name = 'results'
+    paginate_by = 6
+
+
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = "product_detail/product_detail.html"

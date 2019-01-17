@@ -1,7 +1,7 @@
 from django.urls import path
 
 from product_detail.views.product_detail import (
-    product_list,
+    product_list, ProductListView,
     ProductCreateView, ProductUpdateView, ProductDeleteView, ProductDetailView,
     )
 
