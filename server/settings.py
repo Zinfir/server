@@ -77,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'product_list.context_processors.categories',
             ],
         },
     },
@@ -84,6 +85,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'server.wsgi.application'
 
+# Email settings
+
+EMAIL_HOST = 'localhost'
+
+EMAIL_PORT = '3000'
+
+EMAIL_HOST_USER = None
+
+EMAIL_HOST_PASSWORD = None
+
+EMAIL_USE_SSL = False
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+
+EMAIL_FILE_PATH = 'tmp/email-messages/'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases

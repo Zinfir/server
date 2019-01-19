@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.core.mail import send_mail
-from accounts.forms import Account_Form, Registration_Form
+from accounts.forms import Account_Form, Registration_Form, Registration_Model_Form
 from accounts.models import Account
+from server import settings
+from django.http import HttpResponse
+import random, hashlib
 
 def profile(request, pk):
     acc = get_object_or_404(Account, pk=pk)
@@ -31,23 +34,43 @@ def logout_view(request):
     return redirect(success_url)
 
 
+def verify(request):
+    try:
+        user = Account.objects.get(email=email)
+        if user.activation_key == activation_key and not user.is_activation_key_expired():
+            user.is_active=True
+            user.save()
+            auth.login(request, user)
+            return render(request, 'authapp/verification.html')
+        else:
+            print( f'error activation user: {user} ' )
+            return render(request, 'authapp/verification.html')
+    except Exception as e:
+        print(f'error activation user: {e.args}')
+        return HttpResponseRedirect(reverse('main:main'))
+
+
 def registration(request):
     template_name = "accounts/registration.html"
     success_url = reverse_lazy('accounts:login')
-    form = Registration_Form()
-
+    form = Registration_Model_Form(request.POST)
     if request.method == 'POST':
-        form = Registration_Form(data=request.POST)
+        form = Registration_Model_Form(data=request.POST)
         if form.is_valid():
-            email = form.cleaned_data.get('email')
+            user = form.save()
+            user.is_active = False
+            salt = hashlib.sha1(str(random.random()).encode('utf8')).hexdigest()[:6]
+            user.activation_key = hashlib.sha1((user.email + salt).encode('utf8')).hexdigest()
+            user.save()
+            verify_link = reverse('accounts:verify' , args=[user.email, user.activation_key])
             send_mail(
                 'Registration User',
-                f'Test Message.',
+                f'Для подтверждения учетной записи {user.username} на портале \ перейдите по ссылке: http://localhost:8000/{verify_link}',
                 from_email='info@project.ru',
-                recipient_list=[email],
+                recipient_list=[user.email],
+                fail_silently=False
             )
             return redirect(success_url)
-
     return render(request, template_name, {'form': form})
 
 

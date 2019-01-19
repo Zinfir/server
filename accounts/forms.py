@@ -47,12 +47,16 @@ class Registration_Form(forms.Form):
         )
     )
 
-    def save(self):
-        user = super(Registration_Form, self).save()
 
-        user.is_active = False
-        salt = hashlib.shal(str(random.random()).encode('utf8')).hexdigest()[:6]
-        user.activation_key = hashlib.shal((user.email + salt).encode('utf8')).hexdigest()
-        user.save()
-
-        return user
+class Registration_Model_Form(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = [
+            'username',
+            'password',
+            'email',
+            ]
+        widgets = {
+            'password': forms.PasswordInput(attrs={'class': 'field_password'}),
+            'email': forms.EmailInput(attrs={'class': 'field_email'}),
+        }

@@ -1,6 +1,6 @@
-from django.urls import path
+from django.urls import path, re_path
 
-from accounts.views import login_view, logout_view, registration, account_update, profile, account_delete
+from accounts.views import login_view, logout_view, registration, account_update, profile, account_delete, verify
 
 
 app_name = 'accounts'
@@ -13,4 +13,5 @@ urlpatterns = [
     path('registration/', registration, name='registration'),
     path('update/<int:pk>/', account_update, name='update'),
     path('delete/<int:pk>/', account_delete, name='delete'),
+    re_path(r'^verify/(?P<email>.+)/(?P<activation_key>\w+)/$', verify, name='verify' ),
 ]
