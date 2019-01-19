@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
-
-from accounts.forms import Account_Form
+from django.core.mail import send_mail
+from accounts.forms import Account_Form, Registration_Form
 from accounts.models import Account
 
 def profile(request, pk):
@@ -34,12 +34,18 @@ def logout_view(request):
 def registration(request):
     template_name = "accounts/registration.html"
     success_url = reverse_lazy('accounts:login')
-    form = Account_Form(request.POST)
+    form = Registration_Form()
 
     if request.method == 'POST':
+        form = Registration_Form(data=request.POST)
         if form.is_valid():
-            form.save()
-
+            email = form.cleaned_data.get('email')
+            send_mail(
+                'Registration User',
+                f'Test Message.',
+                from_email='info@project.ru',
+                recipient_list=[email],
+            )
             return redirect(success_url)
 
     return render(request, template_name, {'form': form})
